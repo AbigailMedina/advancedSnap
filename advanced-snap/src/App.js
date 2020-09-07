@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import Cards from './components/Cards';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         >
           Learn React it's Great!
         </a>
+        <Cards howMany="3" click={()=>{console.log("hello world")}}></Cards>
       </header>
     </div>
   );
