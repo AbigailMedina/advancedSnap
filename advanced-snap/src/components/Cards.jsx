@@ -39,16 +39,39 @@ class Cards extends Component {
 		for(var i = 0 ; i < numPlayers ; i++){
 			drawn = deck.draw(deckLength/numPlayers)
 			//need to push deck: Deck(drawn) not just drawn
-			tmpPlayers.push({"deck":new Deck(drawn), "pname": "Player"+i})
+			tmpPlayers.push({
+				"deck":new Deck(drawn),
+			 	"pname": "Player"+i,
+			 	"dead":false
+			 })
 		}
 		this.setState({players:tmpPlayers, discardDeck:discardDeck})
 		console.log("setUpPlayerDecks cards",numPlayers, tmpPlayers)
 
 	}
+
+	killPlayer(player){
+		player.dead=true
+
+		const newPlayers = this.state.players.map(p=>{ 
+			if (p.pname===player.pname){
+
+				return player;
+			}else{
+				return p;
+			}
+		})
+		console.log("killPlayer",newPlayers)
+		this.setState({players:newPlayers})
+		
+	}
 	/*
 	draw a card from players deck, add it to the discard deck
 	*/
 	draw(player){
+		if(player.deck.remainingLength<1){
+			this.killPlayer(player);return;
+		}
 		var drawnCard = player.deck.draw()
 		var currentDiscardDeck = this.state.discardDeck
 		currentDiscardDeck.add(drawnCard)
@@ -59,12 +82,26 @@ class Cards extends Component {
 			topCardOwner:player.pname
 		})
 	}
+	snap(){
+		/*
+			if state.discardPile is snappable:
+				drawnCards = draw all cards from discardPile
+				player.deck.addToBottom(drawnCards)
+			else add stupid card:
+				drawnCard = draw 1 card from top of player.deck
+				state.discardPile.addToBottom(drawnCard)
+		*/
+		console.log("snapped?")
+	}
 	render() {
 	  	return (
 	  		<div>
-	  			<div onClick={()=>{console.log(this.state.players)}}>
+	  			<div>
 	  				{this.state.topCard}
 	  				{this.state.topCardOwner}
+					 <figure className="image is-4x5 cardImage">
+						<img alt="backofplayingcard" src="/backofplayingcard.jpg" onClick={()=>{this.snap()}}></img>
+					</figure>
 	  			</div>
 	  			<Container>
 	  			<Columns>
@@ -72,11 +109,18 @@ class Cards extends Component {
 	  				this.state.players.map(
 		  				(player) =>
 		  				{return(
-		  					<Columns.Column key={player.pname}>
+		  					<Columns.Column onClick={()=>{this.draw(player)}} key={player.pname}>
 			  					<div>{player.pname}</div>
-			  					<figure className="image is-4x5 cardImage">
-			  						<img alt="backofplayingcard" src="/backofplayingcard.jpg" onClick={()=>{this.draw(player)}}></img>
-		  						</figure>
+			  					{player.dead?
+			  						<div>
+				  						<figure className="image is-4x5 cardImage">
+					  						<img alt="deadcard" src="/deadcard.jpg"></img>
+				  						</figure>"Out of Cards - Snap the next Snappable or you lose!"
+			  						</div>:
+			  						<figure className="image is-4x5 cardImage">
+				  						<img alt="backofplayingcard" src="/backofplayingcard.jpg" ></img>
+			  						</figure>
+			  					}
 		  						<div>num cards left: {player.deck.remainingLength}</div>
 		  					</Columns.Column>
 		  				)}
