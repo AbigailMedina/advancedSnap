@@ -1,0 +1,11 @@
+bugs
+1)
+
+todo
+1) have card to display instead of tostring of card as discard deck
+2) write snap function in cards.jsx
+3) create snappable class logic
+3.1) need way to peek at decks last 3 cards. Create extension of deck class?
+4) have way for users to see last 3 cards instead of just one card in discard pile
+4.1) use peek functionality from deck extension class?
+5) make pretty
