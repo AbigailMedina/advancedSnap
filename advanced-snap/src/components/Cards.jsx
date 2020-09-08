@@ -21,14 +21,29 @@ class Cards extends Component {
 		var numPlayers = this.props.howManyPlayers;
 		var tmpPlayers = [];
 		var drawn = {}
-
+		console.log("componentDidMount cards",numPlayers)
 		for(var i = 0 ; i < numPlayers ; i++){
 			drawn = this.state.baseDeck.draw(deckLength/numPlayers)
 			//need to push deck: Deck(drawn) not just drawn
 			tmpPlayers.push({"deck":drawn, "pname": "Player"+i})
-			console.log(tmpPlayers)
 		}
 		this.setState({players:tmpPlayers})
+	}
+	componentDidUpdate(prevProps){
+		if(prevProps.howManyPlayers!=this.props.howManyPlayers){
+			var deck = new decks.StandardDeck({ jokers: 2 });
+			var deckLength = deck.totalLength;
+			var numPlayers = this.props.howManyPlayers;
+			var tmpPlayers = [];
+			var drawn = {}
+			console.log("componentDidUpdate cards",numPlayers)
+			for(var i = 0 ; i < numPlayers ; i++){
+				drawn = deck.draw(deckLength/numPlayers)
+				//need to push deck: Deck(drawn) not just drawn
+				tmpPlayers.push({"deck":drawn, "pname": "Player"+i})
+			}
+			this.setState({players:tmpPlayers,baseDeck:deck})
+		}
 	}
 
 	draw(player){
