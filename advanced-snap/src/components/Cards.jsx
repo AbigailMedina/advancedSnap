@@ -25,7 +25,7 @@ class Cards extends Component {
 		for(var i = 0 ; i < numPlayers ; i++){
 			drawn = this.state.baseDeck.draw(deckLength/numPlayers)
 			//need to push deck: Deck(drawn) not just drawn
-			tmpPlayers.push({"deck":drawn, "pname": "Player"+i})
+			tmpPlayers.push({"deck":new Deck(drawn), "pname": "Player"+i})
 		}
 		this.setState({players:tmpPlayers})
 	}
