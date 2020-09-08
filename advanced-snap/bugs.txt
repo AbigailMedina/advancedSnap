@@ -1,0 +1,9 @@
+bugs
+1) 
+- refresh
+- click a players deck and notice the card is drawn
+- change number of players
+- click a players deck
+- error: player.deck.draw is not a function
+
+2)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Columns, Container } from 'react-bulma-components'
 import SelectPlayers from './SelectPlayers'
 import Cards from './Cards'
 
