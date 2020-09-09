@@ -1,5 +1,5 @@
 bugs
-1)
+1) need to update whenever a number of players is selected even if no change
 
 todo
 1) have card to display instead of tostring of card as discard deck
