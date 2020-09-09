@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Columns, Container } from 'react-bulma-components'
-import Snappable from '../classes/Snappable';
+// import Snappable from '../classes/Snappable';
+const {Snappable} = require('../classes/Snappable')
 const { decks, Deck } = require('cards');
 
 class Cards extends Component {
@@ -94,8 +95,8 @@ class Cards extends Component {
 				drawnCard = draw 1 card from top of player.deck
 				state.discardPile.addToBottom(drawnCard)
 		*/
-		console.log(Snappable.snappable(this.state.discardDeck))
-		console.log("snapped?")
+		const snap = new Snappable(this.state.discardDeck)
+		console.log("snappable?",snap.snappable())
 	}
 	render() {
 	  	return (
