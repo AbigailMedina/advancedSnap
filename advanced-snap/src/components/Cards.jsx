@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Columns, Container } from 'react-bulma-components'
+import Snappable from '../classes/Snappable';
 const { decks, Deck } = require('cards');
 
 class Cards extends Component {
@@ -8,6 +9,7 @@ class Cards extends Component {
 	    //cant change props, though can access with this.props.howMany
 	    
 	    this.state = {
+	    	playerTurn:{},
 	    	discardDeck: {},//to keep track of possible snaps; top card is for display purposes
 	    	topCard:"null topCard",
 	    	topCardOwner:"null topCardOwner",
@@ -45,7 +47,7 @@ class Cards extends Component {
 			 	"dead":false
 			 })
 		}
-		this.setState({players:tmpPlayers, discardDeck:discardDeck})
+		this.setState({players:tmpPlayers, discardDeck:discardDeck,playerTurn:tmpPlayers[0]})
 		console.log("setUpPlayerDecks cards",numPlayers, tmpPlayers)
 
 	}
@@ -83,6 +85,7 @@ class Cards extends Component {
 		})
 	}
 	snap(){
+
 		/*
 			if state.discardPile is snappable:
 				drawnCards = draw all cards from discardPile
@@ -91,6 +94,7 @@ class Cards extends Component {
 				drawnCard = draw 1 card from top of player.deck
 				state.discardPile.addToBottom(drawnCard)
 		*/
+		console.log(Snappable.snappable(this.state.discardDeck))
 		console.log("snapped?")
 	}
 	render() {
