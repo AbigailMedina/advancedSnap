@@ -10,10 +10,12 @@ class BetterDeck{
 	constructor(deck){
 		this.deck = deck
 	}
-	getDeckCards(){
+	get deckCards(){
 		var oldDeckCards = this.deck.draw(this.deck.remainingLength)
+		console.log("oldDeckCards",oldDeckCards)
 		this.deck = new Deck(oldDeckCards)
-		return oldDeckCards;
+		console.log("deck copy",this.deck)
+		return [oldDeckCards,this.deck];
 	}
 }
 exports.BetterDeck =BetterDeck;

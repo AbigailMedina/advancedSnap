@@ -11,8 +11,11 @@ class Snappable {
 		// console.log("topx",this.deck.deckCards,deckCopy,this.deck)
 		// // this.deck.discardAllHeld()
 		// return this.deck.draw(x);
+		console.log("topX", this.deck)
 		var betterDeck = new BetterDeck(this.deck);
-		var topCards = betterDeck.getDeckCards()
+		
+		var [topCards, d] = betterDeck.deckCards
+		this.deck = d;
 		console.log("topX, topCards:",topCards)
 		return topCards
 	}
