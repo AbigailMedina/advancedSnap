@@ -4,6 +4,9 @@ import { Columns, Container } from 'react-bulma-components'
 const {Snappable} = require('../classes/Snappable')
 const { decks, Deck } = require('cards');
 
+
+// keep up the good work Abby! <3
+
 class Cards extends Component {
 	constructor(props) {
 	    super(props);
